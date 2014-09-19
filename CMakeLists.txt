@@ -1,0 +1,21 @@
+PROJECT (GObjectPlugin C)
+
+CMAKE_MINIMUM_REQUIRED (VERSION 2.8)
+
+SET (PROJECT_LOWERCASE_NAME "gobject-plugin")
+SET (PROJECT_DESCRIPTION "Host/Plugin Interfaces for GObject Based Applications/Libraries.")
+
+SET (MAJOR 0)
+SET (MINOR 1)
+SET (PATCH 0)
+
+LIST (APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/backbone)
+
+ADD_SUBDIRECTORY (src)
+ADD_SUBDIRECTORY (po)
+ADD_SUBDIRECTORY (pkg-config)
+ADD_SUBDIRECTORY (test)
+ADD_SUBDIRECTORY (cpack)
+
+# enable testing
+ENABLE_TESTING ()
