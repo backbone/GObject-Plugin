@@ -9,18 +9,18 @@ public class TypeB1 : PluginTypeB {
 	 * Constructs a new ``TypeB1``.
 	 */
 	construct {
-		stdout.puts ("TypeB1 init\n");
+		stdout.puts ("TypeB1 init () called\n");
 	}
 
 	/**
 	 * Destroys the ``TypeB1``.
 	 */
 	~Test () {
-		stdout.puts ("TypeB1 deinit\n");
+		stdout.puts ("TypeB1 deinit () called\n");
 	}
 
 	/**
-	 * Any virtual method for PluginTypeB.
+	 * Any abstract method realization for PluginTypeB.
 	 */
 	public override string method_b () {
 		stdout.puts ("TypeB1.method_b () called\n");

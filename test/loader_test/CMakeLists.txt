@@ -4,11 +4,18 @@ SET (BinPackages gee-0.8 gio-2.0)
 SET (BinCustomVapis ${CMAKE_BINARY_DIR}/src/loader/${PROJECT_LOWERCASE_NAME}-loader-${MAJOR}.vapi
      ${CMAKE_BINARY_DIR}/src/plugin-iface/${PROJECT_LOWERCASE_NAME}-iface-${MAJOR}.vapi
      ${CMAKE_BINARY_DIR}/test/loader_test-iface/loader_test-iface-${MAJOR}.vapi
+     ${CMAKE_BINARY_DIR}/src/host-iface/${PROJECT_LOWERCASE_NAME}-host-iface-${MAJOR}.vapi
 )
-SET (BinLinkLibs ${PROJECT_LOWERCASE_NAME}-loader ${PROJECT_LOWERCASE_NAME}-iface loader_test-iface
+SET (BinLinkLibs ${PROJECT_LOWERCASE_NAME}-loader
+                 ${PROJECT_LOWERCASE_NAME}-iface
+                 ${PROJECT_LOWERCASE_NAME}-host-iface
+                 loader_test-iface
 )
-INCLUDE_DIRECTORIES ("${CMAKE_BINARY_DIR}/src/loader" "${CMAKE_BINARY_DIR}/src/plugin-iface"
-"${CMAKE_BINARY_DIR}/test/loader_test-iface")
+INCLUDE_DIRECTORIES ("${CMAKE_BINARY_DIR}/src/loader"
+                     "${CMAKE_BINARY_DIR}/src/plugin-iface"
+                     "${CMAKE_BINARY_DIR}/test/loader_test-iface"
+                     "${CMAKE_BINARY_DIR}/src/host-iface"
+)
 INCLUDE (ValaBinCommonRules)
 
 # Plugin Loading Test
@@ -21,17 +28,26 @@ ENDMACRO (plugin_loading_test)
 
 # Testing Plugin:[de]init() and Library unload()
 plugin_loading_test (SimpleLoaderTest
-"Plugin Type Name = TypeA1
-Plugin Type Name = TypeA2
-Plugin Type Name = TypeB1
-Plugin Type Name = TypeB2
-TypeA1 init
-TypeA1.method_a \\\\(\\\\) called
-TypeA1 deinit
-TypeB1 init
-TypeB1.method_b \\\\(\\\\) called
-TypeB1 returned string
-TypeB1 deinit"
+"List Plugins:
+  Name = TypeA1
+  Name = TypeA2
+  Name = TypeB1
+  Name = TypeB2
+Creating PluginTypeA Object:
+  TypeA1 init \\\\(\\\\) called
+Call a.method_a \\\\(\\\\) from main app:
+  TypeA1.method_a \\\\(\\\\) called
+Call IHostLoaderTest.method_host \\\\(\\\\) from TypeA1:
+  LoaderTestHost.method_host \\\\(\\\\) called
+Destroing PluginTypeA Object:
+  TypeA1 deinit \\\\(\\\\) called
+Creating PluginTypeB Object:
+  TypeB1 init \\\\(\\\\) called
+Call b.method_b \\\\(\\\\) from main app:
+  TypeB1.method_b \\\\(\\\\) called
+  Returned String: TypeB1 returned string
+Destroing PluginTypeB Object:
+  TypeB1 deinit \\\\(\\\\) called"
 )
 SET_TESTS_PROPERTIES(loader_test-SimpleLoaderTest PROPERTIES ENVIRONMENT "LANG=en")
 

@@ -68,8 +68,10 @@ namespace GObject {
 			/**
 			 * Creates Plugin instance from the module.
 			 */
-			public Plugin create_instance () {
-				return Object.new (type) as Plugin;
+			public Plugin create_instance (IHost ihost) {
+				var p = Object.new (type) as Plugin;
+				p.host = ihost;
+				return p;
 			}
 		}
 

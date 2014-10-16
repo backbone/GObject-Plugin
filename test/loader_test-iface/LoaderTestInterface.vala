@@ -1,15 +1,25 @@
 using GObject.Plugins;
 
 /**
+ * Loader Host Interface.
+ */
+public interface IHostLoaderTest : IHost {
+
+	/**
+	 * Any Host Method.
+	 */
+	public abstract void method_host ();
+}
+
+/**
  * Abstract plugin of type A.
  */
 public abstract class PluginTypeA: Plugin {
 
 	/**
-	 * Any virtual method for PluginTypeA.
+	 * Any abstract method for PluginTypeA.
 	 */
-	[CCode (has_target = false)]
-	public virtual void method_a () { }
+	public abstract void method_a ();
 }
 
 /**
@@ -18,7 +28,7 @@ public abstract class PluginTypeA: Plugin {
 public abstract class PluginTypeB : Plugin {
 
 	/**
-	 * Any virtual method for PluginTypeB.
+	 * Any abstract method for PluginTypeB.
 	 */
-	public virtual string method_b () { return ""; }
+	public abstract string method_b ();
 }

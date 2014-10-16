@@ -9,21 +9,23 @@ public class TypeA1 : PluginTypeA {
 	 * Constructs a new ``TypeA1``.
 	 */
 	construct {
-		stdout.puts ("TypeA1 init\n");
+		stdout.puts ("TypeA1 init () called\n");
 	}
 
 	/**
 	 * Destroys the ``TypeA1``.
 	 */
 	~Test () {
-		stdout.puts ("TypeA1 deinit\n");
+		stdout.puts ("TypeA1 deinit () called\n");
 	}
 
 	/**
-	 * Any virtual method for PluginTypeA.
+	 * Any abstract method realization for PluginTypeA.
 	 */
 	public override void method_a () {
 		stdout.puts ("TypeA1.method_a () called\n");
+		stdout.puts ("Call IHostLoaderTest.method_host () from TypeA1:\n  ");
+		(host as IHostLoaderTest).method_host ();
 	}
 }
 

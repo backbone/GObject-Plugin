@@ -18,6 +18,11 @@ namespace GObject {
 		 * Abstract Plugin.
 		 */
 		public abstract class Plugin : Object, IPlugabble {
+
+			/**
+			 * Host Interface.
+			 */
+			public IHost host = null;
 		}
 	}
 }
