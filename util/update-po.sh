@@ -28,22 +28,22 @@ xgettext --language=C --escape --package-name=$PROJECT_LOWERCASE_NAME_ABI --defa
   -kg_dngettext -kg_dpgettext -kg_dpgettext2 -kg_strip_context -F -n -o \
   $PRJ_PATH/$PO_DIR_NAME/$GLADE_POT $C_FILELIST
 
-msgcat -o $PRJ_PATH/$PO_DIR_NAME/$PROJECT.pot --use-first $PRJ_PATH/$PO_DIR_NAME/$SOURCE_POT $PRJ_PATH/$PO_DIR_NAME/$GLADE_POT
+msgcat -o $PRJ_PATH/$PO_DIR_NAME/$PROJECT_LOWERCASE_NAME_ABI.pot --use-first $PRJ_PATH/$PO_DIR_NAME/$SOURCE_POT $PRJ_PATH/$PO_DIR_NAME/$GLADE_POT
 
 rm $PRJ_PATH/$PO_DIR_NAME/$SOURCE_POT
 rm $PRJ_PATH/$PO_DIR_NAME/$GLADE_POT
 
 [ 0 != $? ] && echo "xgettext failed ;-(" && exit 1
-[ ! -e $PRJ_PATH/$PO_DIR_NAME/$PROJECT.pot ] && echo "No strings found ;-(" && exit 1
+[ ! -e $PRJ_PATH/$PO_DIR_NAME/$PROJECT_LOWERCASE_NAME_ABI.pot ] && echo "No strings found ;-(" && exit 1
 
 for d in $PRJ_PATH/$PO_DIR_NAME/*; do
   [ ! -d $d ] && continue
 
-  if [ -e $d/$PROJECT.po ]; then
-    echo "Merging '${d##*/}' locale" && msgmerge -F -U $d/$PROJECT.po $PRJ_PATH/$PO_DIR_NAME/$PROJECT.pot
+  if [ -e $d/$PROJECT_LOWERCASE_NAME_ABI.po ]; then
+    echo "Merging '${d##*/}' locale" && msgmerge -F -U $d/$PROJECT_LOWERCASE_NAME_ABI.po $PRJ_PATH/$PO_DIR_NAME/$PROJECT_LOWERCASE_NAME_ABI.pot
     [ 0 != $? ] && echo "msgmerge failed ;(" && exit 1
   else
-    echo "Creating '${d##*/}' locale" && msginit -l ${d##*/} -o  $d/$PROJECT.po -i $PRJ_PATH/$PO_DIR_NAME/$PROJECT.pot
+    echo "Creating '${d##*/}' locale" && msginit -l ${d##*/} -o  $d/$PROJECT_LOWERCASE_NAME_ABI.po -i $PRJ_PATH/$PO_DIR_NAME/$PROJECT_LOWERCASE_NAME_ABI.pot
     [ 0 != $? ] && echo "msginit failed ;(" && exit 1
   fi
 
