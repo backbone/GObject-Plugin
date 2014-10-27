@@ -6,7 +6,7 @@ SET (LibCustomVapis ${CMAKE_BINARY_DIR}/src/plugin-iface/${PROJECT_LOWERCASE_NAM
 )
 SET (LibExtraSources ${PROJECT_SOURCE_DIR}/src/library_constructor.c)
 SET (LibInstall ON)
-SET (LibLinkLibs ${PROJECT_LOWERCASE_NAME}-iface ${PROJECT_LOWERCASE_NAME}-host-iface)
+SET (LibLinkLibs ${PROJECT_LOWERCASE_NAME}-iface ${PROJECT_LOWERCASE_NAME}-host-iface gmodule-2.0)
 INCLUDE_DIRECTORIES ("${CMAKE_BINARY_DIR}/src/plugin-iface"
                      "${CMAKE_BINARY_DIR}/src/host-iface"
 )
