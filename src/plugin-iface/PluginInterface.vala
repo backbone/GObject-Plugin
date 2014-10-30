@@ -22,7 +22,7 @@ namespace GObject {
 			/**
 			 * Host Interface.
 			 */
-			public IHost host = null;
+			public IHost host { get; set; default = null; }
 		}
 	}
 }
