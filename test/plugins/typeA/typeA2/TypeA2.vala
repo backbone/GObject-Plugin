@@ -15,7 +15,7 @@ public class TypeA2 : PluginTypeA {
 	/**
 	 * Destroys the ``TypeA2``.
 	 */
-	~Test () {
+	~TypeA2 () {
 		stdout.puts ("TypeA2 deinit () called\n");
 	}
 
