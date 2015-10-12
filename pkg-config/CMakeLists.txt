@@ -1,6 +1,6 @@
 INCLUDE (PkgConfigCommon)
 
-SET (PkgConfigLibs "")
+SET (PkgConfigLibs "-L\${libdir}")
 IF (WIN32)
   SET (PkgConfigLibs "${PkgConfigLibs} -l${PROJECT_LOWERCASE_NAME}-iface-${MAJOR}")
   SET (PkgConfigLibs "${PkgConfigLibs} -l${PROJECT_LOWERCASE_NAME}-host-iface-${MAJOR}")
