@@ -1,22 +1,15 @@
-# configure pkg-config file
-IF (WIN32)
-  SET (PkgConfigPrefix "")
-ELSE ()
-  SET (PkgConfigPrefix ${CMAKE_INSTALL_PREFIX})
-ENDIF ()
-SET (PkgConfigExecPrefix "\${prefix}")
-SET (PkgConfigLibDir "\${exec_prefix}/lib")
-SET (PkgConfigIncludeDir "\${prefix}/include")
+INCLUDE (PkgConfigCommon)
 
-SET (PkgConfigName "${CMAKE_PROJECT_NAME}")
-SET (PkgConfigDescription "${PROJECT_DESCRIPTION}")
-SET (PkgConfigVersion "${MAJOR}.${MINOR}.${PATCH}")
-SET (PkgConfigLibs "-L\${libdir}")
-SET (PkgConfigLibs "${PkgConfigLibs} -l${PROJECT_LOWERCASE_NAME}-iface.so.${MAJOR}")
-SET (PkgConfigLibs "${PkgConfigLibs} -l${PROJECT_LOWERCASE_NAME}-host-iface.so.${MAJOR}")
-SET (PkgConfigLibs "${PkgConfigLibs} -l${PROJECT_LOWERCASE_NAME}-loader.so.${MAJOR}")
-SET (PkgConfigLibsPrivate "")
-SET (PkgConfigCflags "")
+SET (PkgConfigLibs "")
+IF (WIN32)
+  SET (PkgConfigLibs "${PkgConfigLibs} -l${PROJECT_LOWERCASE_NAME}-iface-${MAJOR}")
+  SET (PkgConfigLibs "${PkgConfigLibs} -l${PROJECT_LOWERCASE_NAME}-host-iface-${MAJOR}")
+  SET (PkgConfigLibs "${PkgConfigLibs} -l${PROJECT_LOWERCASE_NAME}-loader-${MAJOR}")
+ELSE (WIN32)
+  SET (PkgConfigLibs "${PkgConfigLibs} -l${PROJECT_LOWERCASE_NAME}-iface.so.${MAJOR}")
+  SET (PkgConfigLibs "${PkgConfigLibs} -l${PROJECT_LOWERCASE_NAME}-host-iface.so.${MAJOR}")
+  SET (PkgConfigLibs "${PkgConfigLibs} -l${PROJECT_LOWERCASE_NAME}-loader.so.${MAJOR}")
+ENDIF (WIN32)
 
 CONFIGURE_FILE (
   "${CMAKE_CURRENT_SOURCE_DIR}/pkg-config.pc.in"
