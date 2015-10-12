@@ -7,7 +7,7 @@ SET (PROJECT_DESCRIPTION "Host/Plugin Interfaces for GObject Based Applications/
 
 SET (MAJOR 0)
 SET (MINOR 1)
-SET (PATCH 7)
+SET (PATCH 8)
 
 LIST (APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/backbone)
 
