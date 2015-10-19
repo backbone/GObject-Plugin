@@ -1,4 +1,4 @@
-INCLUDE (PkgConfigCommon)
+INCLUDE (PkgConfigCommonRules)
 
 SET (PkgConfigLibs "-L\${libdir}")
 IF (WIN32)
@@ -12,6 +12,6 @@ ELSE (WIN32)
 ENDIF (WIN32)
 
 CONFIGURE_FILE (
-  "${CMAKE_CURRENT_SOURCE_DIR}/pkg-config.pc.in"
+  "${CMAKE_SOURCE_DIR}/cmake/backbone/templates/pkg-config.pc.in"
   "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_LOWERCASE_NAME}-${MAJOR}.pc"
 )
