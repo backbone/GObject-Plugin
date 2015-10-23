@@ -11,5 +11,3 @@ INCLUDE_DIRECTORIES ("${CMAKE_BINARY_DIR}/src/plugin-iface"
                      "${CMAKE_BINARY_DIR}/src/host-iface"
 )
 INCLUDE (ValaPluginCommonRules)
-
-#INSTALL (TARGETS ${PluginName} DESTINATION lib/${PROJECT_LOWERCASE_NAME}-${MAJOR}/plugins/${PluginName})
