@@ -2,19 +2,16 @@ SET (BinName loader_test)
 FILE (GLOB_RECURSE BinSources RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} LoaderTest.vala)
 SET (BinPackages gee-0.8 gio-2.0)
 SET (BinCustomVapis ${CMAKE_BINARY_DIR}/src/loader/${PROJECT_LOWERCASE_NAME}-loader-${MAJOR}.vapi
-     ${CMAKE_BINARY_DIR}/src/plugin-iface/${PROJECT_LOWERCASE_NAME}-iface-${MAJOR}.vapi
+     ${CMAKE_BINARY_DIR}/src/iface/${PROJECT_LOWERCASE_NAME}-iface-${MAJOR}.vapi
      ${CMAKE_BINARY_DIR}/test/loader_test-iface/loader_test-iface-${MAJOR}.vapi
-     ${CMAKE_BINARY_DIR}/src/host-iface/${PROJECT_LOWERCASE_NAME}-host-iface-${MAJOR}.vapi
 )
 SET (BinLinkLibs ${PROJECT_LOWERCASE_NAME}-loader
                  ${PROJECT_LOWERCASE_NAME}-iface
-                 ${PROJECT_LOWERCASE_NAME}-host-iface
                  loader_test-iface
 )
 INCLUDE_DIRECTORIES ("${CMAKE_BINARY_DIR}/src/loader"
-                     "${CMAKE_BINARY_DIR}/src/plugin-iface"
+                     "${CMAKE_BINARY_DIR}/src/iface"
                      "${CMAKE_BINARY_DIR}/test/loader_test-iface"
-                     "${CMAKE_BINARY_DIR}/src/host-iface"
 )
 INCLUDE (ValaBinCommonRules)
 

@@ -1,5 +1,5 @@
-SET (LibName ${PROJECT_LOWERCASE_NAME}-host-iface)
-FILE (GLOB_RECURSE LibSources RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} HostInterface.vala)
+SET (LibName ${PROJECT_LOWERCASE_NAME}-iface)
+FILE (GLOB_RECURSE LibSources RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.vala)
 SET (LibPkgModules gee-0.8 gio-2.0)
 SET (LibExtraSources ${PROJECT_SOURCE_DIR}/src/library_constructor.c)
 SET (LibInstall ON)

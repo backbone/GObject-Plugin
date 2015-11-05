@@ -1,3 +1,2 @@
-ADD_SUBDIRECTORY (host-iface)
-ADD_SUBDIRECTORY (plugin-iface)
+ADD_SUBDIRECTORY (iface)
 ADD_SUBDIRECTORY (loader)

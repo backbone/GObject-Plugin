@@ -1,8 +1,0 @@
-SET (LibName ${PROJECT_LOWERCASE_NAME}-iface)
-FILE (GLOB_RECURSE LibSources RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} PluginInterface.vala)
-SET (LibCustomVapis ${CMAKE_BINARY_DIR}/src/host-iface/${PROJECT_LOWERCASE_NAME}-host-iface-${MAJOR}.vapi)
-SET (LibExtraSources ${PROJECT_SOURCE_DIR}/src/library_constructor.c)
-SET (LibInstall ON)
-SET (LibLinkLibs ${PROJECT_LOWERCASE_NAME}-host-iface)
-INCLUDE_DIRECTORIES ("${CMAKE_BINARY_DIR}/src/host-iface")
-INCLUDE (ValaLibCommonRules)
