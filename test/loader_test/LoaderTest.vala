@@ -13,13 +13,13 @@ int main (string [] args) {
 
 	var h = new LoaderTestHost ();
 
-	GObject.Plugins.load_modules (
+	GObject.Plugins.load_modules_depth2 (
 	    Path.build_path (Path.DIR_SEPARATOR_S, File.new_for_path (
 	        args[0]).get_parent ().get_parent ().get_path (), "test/plugins/typeA"),
 	    ref type_a_modules
 	);
 
-	GObject.Plugins.load_modules (
+	GObject.Plugins.load_modules_depth2 (
 	    Path.build_path (Path.DIR_SEPARATOR_S, File.new_for_path (
 	        args[0]).get_parent ().get_parent ().get_path (), "test/plugins/typeB"),
 	    ref type_b_modules

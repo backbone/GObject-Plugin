@@ -75,6 +75,50 @@ namespace GObject {
 			}
 		}
 
+		void sort_modules (Gee.ArrayList<Module> modules) {
+			modules.sort ((a, b) => {
+					var a_name = a.get_plugin_type ().name ();
+					var b_name = b.get_plugin_type ().name ();
+					if (a_name < b_name) return -1;
+					if (a_name > b_name) return 1;
+					return 0;
+			});
+		}
+
+		/**
+		 * Loads modules in the specific directory.
+		 *
+		 * @param dir_path path to the directory.
+		 * @param modules where to save list of modules.
+		 *
+		 * @return are the modules loaded correctly or not.
+		 */
+		public bool load_modules (string dir_path, ref Gee.ArrayList<Module>? modules) {
+
+			modules = new Gee.ArrayList<Module> ();
+
+			try {
+				var libPath = File.new_for_path (dir_path);
+				var lib_enumerator = libPath.enumerate_children (FileAttribute.STANDARD_NAME, 0, null);
+				FileInfo file_info = null;
+				while ((file_info = lib_enumerator.next_file (null)) != null) {
+					if (Regex.match_simple ("^.*\\.(so|dll)$", file_info.get_name ())) {
+						var module = new Module (GLib.Module.build_path (dir_path, file_info.get_name ()));
+						if (module.load ())
+							modules.add (module);
+					}
+				}
+			} catch (Error e) {
+				message (e.message);
+				return false;
+			}
+
+			sort_modules (modules);
+
+			return true;
+		}
+
+
 		/**
 		 * Loads modules in the 2-depth directory tree path.
 		 *
@@ -83,7 +127,7 @@ namespace GObject {
 		 *
 		 * @return are the modules loaded correctly or not.
 		 */
-		public bool load_modules (string dir_path, ref Gee.ArrayList<Module>? modules) {
+		public bool load_modules_depth2 (string dir_path, ref Gee.ArrayList<Module>? modules) {
 
 			modules = new Gee.ArrayList<Module> ();
 
@@ -112,13 +156,7 @@ namespace GObject {
 				return false;
 			}
 
-			modules.sort ((a, b) => {
-					var a_name = a.get_plugin_type ().name ();
-					var b_name = b.get_plugin_type ().name ();
-					if (a_name < b_name) return -1;
-					if (a_name > b_name) return 1;
-					return 0;
-			});
+			sort_modules (modules);
 
 			return true;
 		}
