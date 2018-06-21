@@ -96,27 +96,37 @@ namespace GObject {
 		public bool load_modules (string dir_path, ref Gee.ArrayList<Module>? modules) {
 
 			modules = new Gee.ArrayList<Module> ();
-			var paths = new Gee.HashSet<string> ();
+			#if (WINDOWS)
+				var paths = new Gee.HashSet<string> ();
+			#endif
 
 			try {
 				var libPath = File.new_for_path (dir_path);
+				#if (WINDOWS)
 				for (var i = 0; i < 32; ++i) {
-					var saved_length = modules.size;
+						var saved_length = modules.size;
+				#endif
 					var lib_enumerator = libPath.enumerate_children (FileAttribute.STANDARD_NAME, 0, null);
 					FileInfo file_info = null;
 					while ((file_info = lib_enumerator.next_file (null)) != null) {
 						if (Regex.match_simple ("^.*\\.(so|dll)$", file_info.get_name ())) {
 							var path = GLib.Module.build_path (dir_path, file_info.get_name ());
-							if (paths.contains(path)) continue;
+							#if (WINDOWS)
+								if (paths.contains(path)) continue;
+							#endif
 							var module = new Module (path);
 							if (module.load ()) {
 								modules.add (module);
-								paths.add(path);
+								#if (WINDOWS)
+									paths.add(path);
+								#endif
 							}
 						}
 					}
+				#if (WINDOWS)
 					if (modules.size == saved_length) break;
 				}
+				#endif
 			} catch (Error e) {
 				message (e.message);
 				return false;
@@ -139,12 +149,16 @@ namespace GObject {
 		public bool load_modules_depth2 (string dir_path, ref Gee.ArrayList<Module>? modules) {
 
 			modules = new Gee.ArrayList<Module> ();
-			var paths = new Gee.HashSet<string> ();
+			#if (WINDOWS)
+				var paths = new Gee.HashSet<string> ();
+			#endif
 
 			try {
 				var libPath = File.new_for_path (dir_path);
+				#if (WINDOWS)
 				for (var i = 0; i < 32; ++i) {
-					var saved_length = modules.size;
+						var saved_length = modules.size;
+				#endif
 					var dir_enumerator = libPath.enumerate_children ("standard::*",
 					    FileQueryInfoFlags.NOFOLLOW_SYMLINKS, null);
 					FileInfo dir_info = null;
@@ -157,18 +171,24 @@ namespace GObject {
 								if (Regex.match_simple ("^.*\\.(so|dll)$", file_info.get_name ())) {
 									var path = Path.build_path (Path.DIR_SEPARATOR_S, dir_path, dir_info.get_name ());
 									path = GLib.Module.build_path (path, file_info.get_name ());
-									if (paths.contains(path)) continue;
+									#if (WINDOWS)
+										if (paths.contains(path)) continue;
+									#endif
 									var module = new Module (path);
 									if (module.load ()) {
 										modules.add (module);
-										paths.add(path);
+										#if (WINDOWS)
+											paths.add(path);
+										#endif
 									}
 								}
 							}
 						}
 					}
+				#if (WINDOWS)
 					if (modules.size == saved_length) break;
 				}
+				#endif
 			} catch (Error e) {
 				message (e.message);
 				return false;
