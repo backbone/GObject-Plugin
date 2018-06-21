@@ -36,13 +36,13 @@ namespace GObject {
 			public override bool load () {
 				module = GLib.Module.open (path, GLib.ModuleFlags.BIND_LAZY);
 				if (null == module) {
-					message ("Module '%s' not found", path);
+					stderr.printf("Cannot load module %s\n", path);
 					return false;
 				}
 
 				void * plugin_init = null;
 				if (! module.symbol ("plugin_init", out plugin_init)) {
-					message ("No such symbol: plugin_init in module " + path);
+					stderr.printf("No such symbol: plugin_init in %s\n", path);
 					return false;
 				}
 
