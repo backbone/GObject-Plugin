@@ -29,6 +29,6 @@ public class TypeB2 : PluginTypeB {
 }
 
 [ModuleInit]
-Type plugin_init (GLib.TypeModule type_module) {
+public Type plugin_init (GLib.TypeModule type_module) {
 	return typeof (TypeB2);
 }

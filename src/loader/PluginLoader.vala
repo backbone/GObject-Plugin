@@ -34,7 +34,7 @@ namespace GObject {
 			 * Loads the module.
 			 */
 			public override bool load () {
-				module = GLib.Module.open (path, GLib.ModuleFlags.BIND_LAZY);
+				module = GLib.Module.open (path, GLib.ModuleFlags.LAZY);
 				if (null == module) {
 					stderr.printf("Cannot load module %s\n", path);
 					return false;

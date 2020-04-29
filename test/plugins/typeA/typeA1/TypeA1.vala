@@ -25,11 +25,12 @@ public class TypeA1 : PluginTypeA {
 	public override void method_a () {
 		stdout.puts ("TypeA1.method_a () called\n");
 		stdout.puts ("Call IHostLoaderTest.method_host () from TypeA1:\n  ");
-		(host as IHostLoaderTest).method_host ();
+		var test = host as IHostLoaderTest;
+		if (test != null) test.method_host ();
 	}
 }
 
 [ModuleInit]
-Type plugin_init (GLib.TypeModule type_module) {
+public Type plugin_init (GLib.TypeModule type_module) {
 	return typeof (TypeA1);
 }
