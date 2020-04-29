@@ -1,6 +1,6 @@
 SET (LibName ${PROJECT_LOWERCASE_NAME}-loader)
 FILE (GLOB_RECURSE LibSources RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} PluginLoader.vala)
-SET (LibPackages gee-0.8 gmodule-2.0 gio-2.0)
+SET (LibPackages posix gee-0.8 gmodule-2.0 gio-2.0)
 SET (LibCustomVapis ${CMAKE_BINARY_DIR}/src/iface/${PROJECT_LOWERCASE_NAME}-iface-${MAJOR}.vapi)
 SET (LibInstall ON)
 SET (LibExtraSources ${CMAKE_CURRENT_BINARY_DIR}/library_constructor.c)
